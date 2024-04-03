@@ -1,12 +1,11 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import styles from './app.module.scss';
-
-import NxWelcome from './nx-welcome';
+import AppWindow from './components/AppWindow/app-window';
 
 export function App() {
   return (
     <div>
-      <NxWelcome title="react-tabs" />
+      <AppWindow></AppWindow>
     </div>
   );
 }
