@@ -1,7 +1,43 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+.container{
+    display: flex;
+    width: calc(100% - 32px);
+    margin: 0 16px;
+    height: calc(100% - 4px);
+    margin-top: 4px;
+
+}
+.tab{
+    background-color: #ddd;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    flex-shrink: 1;
+    max-width: 200px;
+    min-width: 20px;
+    padding: 8px 16px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    &+ .tab{
+        margin-left: 1px;
+    }
+
+    .name{
+        flex-grow: 1;
+        margin-right: 24px;
+        text-transform: uppercase;
+    }
+    .menu{
+        flex-shrink: 0;
+        font-size: 0.8rem;
+    }
+    &.active{
+      
+    }
+}
+.add-btn{
+    background-color: #444;
+    color: #eee;
+    box-shadow: none;
+    flex-shrink: 0;
+}

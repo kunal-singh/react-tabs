@@ -14,13 +14,13 @@ export interface AppFrameProps extends FrameData {
 
 export function AppFrame(props: AppFrameProps) {
    
-  const frameId = props.id;
-  const {tabs, content, setTabs, setContent} = useFrameData(frameId);
-
+  const {id, initialContent, initialTabs} = props;
+  const {tabs, addTab, removeTab, content, setContent} = useFrameData(id, initialTabs, initialContent);
+   
   return (
     <div className={styles['container']}>
       <div className={styles['task-bar-wrapper']}>
-        <AppTaskBar tabs={tabs}></AppTaskBar>
+        <AppTaskBar tabs={tabs} add={addTab} remove={removeTab}></AppTaskBar>
       </div>
       <div className={styles['content-wrapper']}>
         <AppWindowContent content={content}></AppWindowContent>
