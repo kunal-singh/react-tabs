@@ -31,7 +31,7 @@ export function useFrameData(frameId:number, initialTabs: Tabs = [], initialCont
     })
   }
   
-  return { tabs, addTab, removeTab,content, setContent };
+  return { tabs, addTab, removeTab, content, setContent };
 }
 
 export default useFrameData;

@@ -8,8 +8,8 @@ import { Tabs } from 'src/app/domain/tabs';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface AppFrameProps extends FrameData {
-  initialTabs: Tabs
-  initialContent: FrameContentType
+  initialTabs?: Tabs
+  initialContent?: FrameContentType
 }
 
 export function AppFrame(props: AppFrameProps) {
@@ -23,7 +23,7 @@ export function AppFrame(props: AppFrameProps) {
         <AppTaskBar tabs={tabs} add={addTab} remove={removeTab}></AppTaskBar>
       </div>
       <div className={styles['content-wrapper']}>
-        <AppWindowContent content={content}></AppWindowContent>
+        <AppWindowContent content={content} setContent={setContent}></AppWindowContent>
       </div>
     </div>
   );

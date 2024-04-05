@@ -2,14 +2,14 @@ import { createContext, useContext, useReducer, ReactNode, Dispatch } from 'reac
 import { FrameNode } from '../domain/frame';
 import { Action } from '../domain/states';
 
-
-const HierarchyContext = createContext<FrameNode | null>(null);
-const HierarchyDispatchContext = createContext<Dispatch<Action> | null>(null);
 const initialState: FrameNode = {
   data:{id:1},
   left: null,
   right:null
 };
+const HierarchyContext = createContext<FrameNode>(initialState);
+const HierarchyDispatchContext = createContext<Dispatch<Action> | null>(null);
+
 
 export function HierarchyProvider({children}: { children: ReactNode }){
 
