@@ -6,4 +6,18 @@
     bottom:0;
     background-color: #444;
  }
+ .flex-container{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    > *{
+        flex-grow: 1;
+    }
+ }
+ .flex-horizontal{
+    flex-direction: row;
+ }
+ .flex-vertical{
+    flex-direction: column;
+ }
 

@@ -1,11 +1,11 @@
 import { createContext, useContext, useReducer, ReactNode, Dispatch } from 'react';
-import { FrameNode } from '../domain/frame';
+import { FrameNode, Orientation } from '../domain/frame';
 import { Action } from '../domain/states';
 
 const initialState: FrameNode = {
-  data:{id:1},
-  left: null,
-  right:null
+  data:{id:1, orientation:Orientation.VERTICAL},
+  left: {data:{id:2, orientation:Orientation.HORIZONTAL}, left:{data:{id:4}, left:null, right:null}, right:{data:{id:5}, left:null, right:null}},
+  right: {data:{id:3, orientation:Orientation.VERTICAL}, left:{data:{id:6}, left:null, right:null}, right:{data:{id:7}, left:null, right:null}}
 };
 const HierarchyContext = createContext<FrameNode>(initialState);
 const HierarchyDispatchContext = createContext<Dispatch<Action> | null>(null);
