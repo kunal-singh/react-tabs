@@ -23,7 +23,7 @@ export function AppFrame(props: AppFrameProps) {
         <AppTaskBar tabs={tabs} add={addTab} remove={removeTab}></AppTaskBar>
       </div>
       <div className={styles['content-wrapper']}>
-        <AppWindowContent content={content} setContent={setContent}></AppWindowContent>
+        <AppWindowContent content={content} setContent={setContent} frameId={id}></AppWindowContent>
       </div>
     </div>
   );

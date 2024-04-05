@@ -1,5 +1,8 @@
 export enum ActionType{
-    SPLIT,
+    SPLITLEFT,
+    SPLITRIGHT,
+    SPLITUP,
+    SPLITDOWN,
     UNSPLIT
 }
 

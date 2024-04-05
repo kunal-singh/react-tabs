@@ -25,11 +25,19 @@ export function HierarchyProvider({children}: { children: ReactNode }){
 }
 
 export function useHierarchy(){
-  return useContext(HierarchyContext);
+  const node = useContext(HierarchyContext);
+  if (!node) {
+    throw new Error('cannot create hierarchy');
+  }
+  return node;
 }
 
 export function useHierarchyDispatch(){
-  return useContext(HierarchyDispatchContext);
+  const dispatch =  useContext(HierarchyDispatchContext);
+  if(!dispatch){
+    throw new Error('cannot create dispatch')
+  }
+  return dispatch;
 }
 
 function nodeReducer(node: FrameNode, action: Action): FrameNode{

@@ -17,7 +17,7 @@ export function AppTaskBar(props: AppTaskBarProps) {
              return (
               <div className={styles['tab']}>
                   <div className={styles['name']}>{t.name}</div>
-                  <button type="button" className={styles['menu']} onClick={(e) => remove(index)}>menu</button>
+                  <button type="button" className={styles['menu']} onClick={(e) => remove(index)}>close</button>
               </div>
              )
           }))

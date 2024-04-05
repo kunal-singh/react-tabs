@@ -1,19 +1,33 @@
-import { FrameContentType } from 'src/app/domain/states';
+import { Action, ActionType, FrameContentType } from 'src/app/domain/states';
 import styles from './app-window-content.module.scss';
 import { Dispatch, SetStateAction } from 'react';
+import { useHierarchyDispatch } from 'src/app/services/hierarchy.service';
+
 
 export interface AppWindowContentProps {
-  content: FrameContentType,
+  content: FrameContentType
   setContent: Dispatch<SetStateAction<FrameContentType>>
+  frameId:number
 }
 
 export function AppWindowContent(props: AppWindowContentProps) {
-  const {content, setContent} = props;
+  const {content, setContent, frameId} = props;
+  const dispatch = useHierarchyDispatch();
+
+  function dispatchEvent(type:ActionType){
+    dispatch({type,id:frameId} as Action)
+  }
   
   // use setContent to set state
 
   return (
     <div className={styles['container']}>
+      <div className={styles['actions-container']}>
+      <button type="button"  onClick={(e) => dispatchEvent(ActionType.SPLITDOWN)}>Split Down</button>
+      <button type="button"  onClick={(e) => dispatchEvent(ActionType.SPLITUP)}>Split Down</button>
+      <button type="button"  onClick={(e) => dispatchEvent(ActionType.SPLITLEFT)}>Split Down</button>
+      <button type="button"  onClick={(e) => dispatchEvent(ActionType.SPLITRIGHT)}>Split Down</button>
+      </div>
       {content}
     </div>
   );
