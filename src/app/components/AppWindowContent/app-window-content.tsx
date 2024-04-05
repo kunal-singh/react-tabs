@@ -1,7 +1,7 @@
-import { Action, ActionType, FrameContentType } from 'src/app/domain/states';
+import { Action, ActionType, FrameContentType } from 'src/app/domain/states.ts';
 import styles from './app-window-content.module.scss';
 import { Dispatch, SetStateAction } from 'react';
-import { useHierarchyDispatch } from 'src/app/services/hierarchy.service';
+import { useHierarchyDispatch } from 'src/app/services/hierarchy.service.tsx';
 
 
 export interface AppWindowContentProps {
@@ -11,14 +11,13 @@ export interface AppWindowContentProps {
 }
 
 export function AppWindowContent(props: AppWindowContentProps) {
-  const {content, setContent, frameId} = props;
+  const {content, setContent, frameId} = props; // use setContent to set state
   const dispatch = useHierarchyDispatch();
 
   function dispatchEvent(type:ActionType){
-    dispatch({type,id:frameId} as Action)
+    dispatch({type,id:frameId} as Action);
   }
   
-  // use setContent to set state
 
   return (
     <div className={styles['container']}>
