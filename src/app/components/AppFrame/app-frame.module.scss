@@ -1,7 +1,15 @@
-/*
- * Replace this with your own classes
- *
- * e.g.
- * .container {
- * }
-*/
+$size-unit: 8px;
+
+.container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.task-bar-wrapper{
+  height: $size-unit * 5;
+}
+
+.content-wrapper{
+    flex-grow: 1;
+    background-color: #eee;
+}

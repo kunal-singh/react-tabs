@@ -8,8 +8,12 @@ export interface AppFrameProps {}
 export function AppFrame(props: AppFrameProps) {
   return (
     <div className={styles['container']}>
-      <AppTaskBar></AppTaskBar>
-      <AppWindowContent></AppWindowContent>
+      <div className={styles['task-bar-wrapper']}>
+        <AppTaskBar></AppTaskBar>
+      </div>
+      <div className={styles['content-wrapper']}>
+        <AppWindowContent></AppWindowContent>
+      </div>
     </div>
   );
 }

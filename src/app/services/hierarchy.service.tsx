@@ -25,9 +25,5 @@ export function HierarchyProvider({children}: { children: ReactNode }){
 }
 
 function nodeReducer(node: FrameNode, action: Action): FrameNode{
-  return {
-    data:{id:1},
-    left:null,
-    right:null
-  }
+  return initialState;
 }

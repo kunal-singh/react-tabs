@@ -1,30 +1,35 @@
 import { useState, useCallback } from 'react';
 
 export interface UseFrameData {
-  getData: () => Promise<any>;
-  updateContent: () => Promise<any>;
-  updateTabsList: () => Promise<any>;
-  close: () => Promise<void>;
+  getData: (id:number) => Promise<any>
+  getTabs: (id:number) => Promise<any>
+  updateContent: (id:number) => Promise<any>
+  updateTabsList: (id:number) => Promise<any>
+  close: (id:number) => Promise<void>
 }
 
 export function useFrameData(): UseFrameData {
-  function getData(): Promise<any> {
+  function getData(id:number): Promise<any> {
     return new Promise(() => {});
   }
 
-  function updateContent(): Promise<any> {
+  function getTabs(id:number): Promise<any> {
     return new Promise(() => {});
   }
 
-  function updateTabsList(): Promise<any> {
+  function updateContent(id:number): Promise<any> {
     return new Promise(() => {});
   }
 
-  function close(): Promise<void> {
+  function updateTabsList(id:number): Promise<any> {
     return new Promise(() => {});
   }
 
-  return { getData, updateContent, updateTabsList, close };
+  function close(id:number): Promise<void> {
+    return new Promise(() => {});
+  }
+
+  return { getData, getTabs ,updateContent, updateTabsList, close };
 }
 
 export default useFrameData;
