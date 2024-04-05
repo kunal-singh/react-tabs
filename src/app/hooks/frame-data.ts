@@ -1,36 +1,19 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { Tabs } from '../domain/tabs';
+import { FrameContentType } from '../domain/states';
 
-export interface UseFrameData {
-  getData: (id:number) => Promise<any>
-  getTabs: (id:number) => Promise<Tabs>
-  updateContent: (id:number) => Promise<any>
-  updateTabsList: (id:number) => Promise<any>
-  close: (id:number) => Promise<void>
+const initialContent = (frameId:number) =>{
+  return `Initial Content for frame `+frameId
 }
 
-export function useFrameData(): UseFrameData {
-  function getData(id:number): Promise<any> {
-    return new Promise((res) => '');
-  }
+const initialTabs = [{
+  name:'Untitled'
+}]
 
-  function getTabs(id:number): Promise<Tabs> {
-    return new Promise((res) => []);
-  }
-
-  function updateContent(id:number): Promise<any> {
-    return new Promise((res) => '');
-  }
-
-  function updateTabsList(id:number): Promise<any> {
-    return new Promise((res) => '');
-  }
-
-  function close(id:number): Promise<void> {
-    return new Promise((res) => '');
-  }
-
-  return { getData, getTabs ,updateContent, updateTabsList, close };
+export function useFrameData(frameId:number){
+  const [tabs, setTabs] = useState<Tabs>([...initialTabs]);
+  const [content,setContent] = useState<FrameContentType>(initialContent(frameId));
+  return { tabs, setTabs, content, setContent };
 }
 
 export default useFrameData;

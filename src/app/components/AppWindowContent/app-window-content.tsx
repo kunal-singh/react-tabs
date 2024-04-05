@@ -1,7 +1,8 @@
+import { FrameContentType } from 'src/app/domain/states';
 import styles from './app-window-content.module.scss';
 
 export interface AppWindowContentProps {
-  content: string | number | null | undefined
+  content: FrameContentType
 }
 
 export function AppWindowContent(props: AppWindowContentProps) {
