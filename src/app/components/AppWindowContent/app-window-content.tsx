@@ -1,12 +1,14 @@
 import styles from './app-window-content.module.scss';
 
-/* eslint-disable-next-line */
-export interface AppWindowContentProps {}
+export interface AppWindowContentProps {
+  content: string | number | null | undefined
+}
 
 export function AppWindowContent(props: AppWindowContentProps) {
+  const {content} = props;
   return (
     <div className={styles['container']}>
-      <h1>Welcome to AppWindowContent!</h1>
+      {content}
     </div>
   );
 }

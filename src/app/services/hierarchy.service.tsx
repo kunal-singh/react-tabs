@@ -24,6 +24,14 @@ export function HierarchyProvider({children}: { children: ReactNode }){
     )
 }
 
+export function useHierarchy(){
+  return useContext(HierarchyContext);
+}
+
+export function useHierarchyDispatch(){
+  return useContext(HierarchyDispatchContext);
+}
+
 function nodeReducer(node: FrameNode, action: Action): FrameNode{
   return initialState;
 }
