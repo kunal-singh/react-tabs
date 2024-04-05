@@ -1,4 +1,4 @@
-import { FrameData } from 'src/app/domain/frame';
+import { ChildNodeData, FrameData } from 'src/app/domain/frame';
 import AppTaskBar from '../AppTaskBar/app-task-bar';
 import AppWindowContent from '../AppWindowContent/app-window-content';
 import styles from './app-frame.module.scss';
@@ -7,7 +7,7 @@ import { FrameContentType } from 'src/app/domain/states';
 import { Tabs } from 'src/app/domain/tabs';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface AppFrameProps extends FrameData {
+export interface AppFrameProps extends ChildNodeData {
   initialTabs?: Tabs
   initialContent?: FrameContentType
 }

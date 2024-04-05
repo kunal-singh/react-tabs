@@ -4,9 +4,15 @@ export enum Orientation{
     VERTICAL
 }
 
-export interface FrameData{
-    id: number
-    orientation?: Orientation
+export type FrameData = ChildNodeData | InternalNodeData
+
+
+export interface ChildNodeData {
+    id:number
+}
+
+export interface InternalNodeData {
+    orientation: Orientation
 }
 
 export interface FrameNode{
