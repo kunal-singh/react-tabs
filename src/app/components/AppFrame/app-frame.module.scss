@@ -5,6 +5,8 @@ $size-unit: 8px;
     flex-direction: column;
     height: 100%;
     border: 1px solid #ccc;
+    resize: both;
+    overflow: auto;
 }
 .task-bar-wrapper{
   height: $size-unit * 5;

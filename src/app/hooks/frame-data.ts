@@ -3,7 +3,7 @@ import { Tabs } from '../domain/tabs';
 import { FrameContentType } from '../domain/states';
 
 const initialContentGen = (frameId:number) =>{
-  return `Initial Content for frame `+frameId
+  return `Initial Content for frame `+frameId+`. Drag the bottom right corner of the window to resize.`
 }
 
 const initialTabsGen = [{

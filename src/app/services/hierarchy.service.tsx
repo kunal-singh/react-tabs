@@ -52,16 +52,31 @@ export function useHierarchyDispatch() {
   return dispatch;
 }
 
-function addNodes(node:FrameNode): FrameNode{
-   return node;
+function addNodes(
+  node: FrameNode,
+  orientation = Orientation.VERTICAL,
+  vector = true
+): FrameNode {
+  return node;
+}
+
+function removeNode(node: FrameNode): FrameNode {
+  return node;
 }
 
 function nodeReducer(node: FrameNode, action: Action): FrameNode {
-    switch(action.type){
-     case ActionType.SPLITDOWN:
-       return addNodes(node);
-     default:
-       return node;  
-    }
-  
+  switch (action.type) {
+    case ActionType.SPLITDOWN:
+      return addNodes(node, Orientation.VERTICAL, false);
+    case ActionType.SPLITUP:
+      return addNodes(node);
+    case ActionType.SPLITLEFT:
+      return addNodes(node, Orientation.HORIZONTAL);
+    case ActionType.SPLITRIGHT:
+      return addNodes(node, Orientation.HORIZONTAL, false);
+    case ActionType.UNSPLIT:
+      return removeNode(node);
+    default:
+      return node;
+  }
 }
