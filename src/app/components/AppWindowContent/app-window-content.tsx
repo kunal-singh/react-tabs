@@ -7,11 +7,12 @@ import { useHierarchyDispatch } from 'src/app/services/hierarchy.service.tsx';
 export interface AppWindowContentProps {
   content: FrameContentType
   setContent: Dispatch<SetStateAction<FrameContentType>>
-  frameId:number
+  frameId:number,
+  activeTabIndex:number
 }
 
 export function AppWindowContent(props: AppWindowContentProps) {
-  const {content, setContent, frameId} = props; // use setContent to set state
+  const {content, setContent, frameId, activeTabIndex} = props; // use setContent to set state
   const dispatch = useHierarchyDispatch();
 
   function dispatchEvent(type:ActionType){
@@ -28,7 +29,7 @@ export function AppWindowContent(props: AppWindowContentProps) {
       <button type="button"  onClick={(e) => dispatchEvent(ActionType.SPLITRIGHT)}>Split Right</button>
       <button type="button"  onClick={(e) => dispatchEvent(ActionType.UNSPLIT)}>Close</button>    
       </div>
-      {content}
+      {content+`. Active Tab is `+activeTabIndex}
     </div>
   );
 }

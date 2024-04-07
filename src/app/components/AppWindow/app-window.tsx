@@ -1,10 +1,8 @@
-import { useHierarchy } from 'src/app/services/hierarchy.service.tsx';
+import { isChildNode, isInternalNode, useHierarchy } from 'src/app/services/hierarchy.service.tsx';
 import styles from './app-window.module.scss';
 import {
   ChildNodeData,
-  FrameData,
   FrameNode,
-  InternalNodeData,
   Orientation,
 } from 'src/app/domain/frame.ts';
 import { ReactNode } from 'react';
@@ -25,13 +23,6 @@ export function AppWindow(props: AppWindowProps): ReactNode {
 function RecursiveRenderer(props: { node: FrameNode }): ReactNode {
   const { node } = props;
 
-  function isChildNode(data: FrameData): data is ChildNodeData {
-    return Object.prototype.hasOwnProperty.call(data, 'id');
-  }
-
-  function isInternalNode(data: FrameData): data is InternalNodeData {
-    return Object.prototype.hasOwnProperty.call(data, 'orientation');
-  }
 
   function renderChildNode(data: ChildNodeData): ReactNode {
     return <AppFrame key={data.id} id={data.id} />;

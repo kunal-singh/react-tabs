@@ -52,11 +52,11 @@ function Node(id:number): FrameNode{
   }
 }
 
-function isChildNode(data: FrameData): data is ChildNodeData {
+export function isChildNode(data: FrameData): data is ChildNodeData {
   return Object.prototype.hasOwnProperty.call(data, 'id');
 }
 
-function isInternalNode(data: FrameData): data is InternalNodeData {
+export function isInternalNode(data: FrameData): data is InternalNodeData {
   return Object.prototype.hasOwnProperty.call(data, 'orientation');
 }
 
@@ -68,15 +68,14 @@ function search(head:FrameNode,id:number): FrameNode | null{
     const searchLeft =head.left && search(head.left, id);
     const searchright = head.right && search(head.right, id);
     return searchLeft || searchright;
-
 }
 
 function searchParent(head: FrameNode, id:number): FrameNode | null{
   if(head.left && head.right && isInternalNode(head.data)){
      const left= head.left.data as ChildNodeData;
      const right= head.right.data as ChildNodeData;
-     console.log(left,right,id)
-     return left.id === id || right.id === id ? head : null;
+     if(left.id === id || right.id === id)
+      return head;
   }
   const searchLeft =head.left && searchParent(head.left, id);
   const searchright = head.right && searchParent(head.right, id);
@@ -102,7 +101,6 @@ function addNodes(
 
 function removeNode(headNode: FrameNode, id:number){
   const parentFrame = searchParent(headNode,id);
-  console.log(parentFrame)
   if(parentFrame){
     parentFrame.left =null;
     parentFrame.right = null;
