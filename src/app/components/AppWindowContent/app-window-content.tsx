@@ -23,9 +23,9 @@ export function AppWindowContent(props: AppWindowContentProps) {
     <div className={styles['container']}>
       <div className={styles['actions-container']}>
       <button type="button"  onClick={(e) => dispatchEvent(ActionType.SPLITDOWN)}>Split Down</button>
-      <button type="button"  onClick={(e) => dispatchEvent(ActionType.SPLITUP)}>Split Down</button>
-      <button type="button"  onClick={(e) => dispatchEvent(ActionType.SPLITLEFT)}>Split Down</button>
-      <button type="button"  onClick={(e) => dispatchEvent(ActionType.SPLITRIGHT)}>Split Down</button>    
+      <button type="button"  onClick={(e) => dispatchEvent(ActionType.SPLITUP)}>Split Up</button>
+      <button type="button"  onClick={(e) => dispatchEvent(ActionType.SPLITLEFT)}>Split Left</button>
+      <button type="button"  onClick={(e) => dispatchEvent(ActionType.SPLITRIGHT)}>Split Right</button>    
       </div>
       {content}
     </div>

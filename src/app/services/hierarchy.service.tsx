@@ -5,21 +5,13 @@ import {
   ReactNode,
   Dispatch,
 } from 'react';
-import { FrameNode, Orientation } from '../domain/frame';
+import { ChildNodeData, FrameData, FrameNode, InternalNodeData, Orientation } from '../domain/frame';
 import { Action, ActionType } from '../domain/states';
 
 const initialState: FrameNode = {
-  data: { id: 1, orientation: Orientation.VERTICAL },
-  left: {
-    data: { id: 2, orientation: Orientation.HORIZONTAL },
-    left: { data: { id: 4 }, left: null, right: null },
-    right: { data: { id: 5 }, left: null, right: null },
-  },
-  right: {
-    data: { id: 3, orientation: Orientation.VERTICAL },
-    left: { data: { id: 6 }, left: null, right: null },
-    right: { data: { id: 7 }, left: null, right: null },
-  },
+  data: { id: 1} as ChildNodeData,
+  left: null,
+  right: null
 };
 const HierarchyContext = createContext<FrameNode>(initialState);
 const HierarchyDispatchContext = createContext<Dispatch<Action> | null>(null);
@@ -52,31 +44,82 @@ export function useHierarchyDispatch() {
   return dispatch;
 }
 
+function Node(id:number): FrameNode{
+  return {
+    data:{id} as ChildNodeData,
+    left:null,
+    right:null
+  }
+}
+
+function isChildNode(data: FrameData): data is ChildNodeData {
+  return Object.prototype.hasOwnProperty.call(data, 'id');
+}
+
+function isInternalNode(data: FrameData): data is InternalNodeData {
+  return Object.prototype.hasOwnProperty.call(data, 'orientation');
+}
+
+
+function search(head:FrameNode,id:number): FrameNode | null{
+    //postorder traversal
+    
+    if(!head.left && !head.right){
+      return isChildNode(head.data) && head.data.id === id ? head : null; 
+    }
+    const searchLeft =head.left && search(head.left, id);
+    const searchright = head.right && search(head.right, id);
+    return searchLeft || searchright;
+
+}
+
+function remove(node: FrameNode, id:number): FrameNode{
+   return node;
+}
+
 function addNodes(
-  node: FrameNode,
+  headNode: FrameNode,
+  splitFrom: number,
   orientation = Orientation.VERTICAL,
   vector = true
-): FrameNode {
-  return node;
+) {
+  
+  const splitFromNode = search(headNode, splitFrom);
+  //console.log(headNode, splitFrom, splitFromNode);
+  if(splitFromNode){
+  const randomId = Date.now();
+  splitFromNode.left = Node(randomId);
+  splitFromNode.right = Node(randomId + 1);
+  splitFromNode.data = {orientation} as InternalNodeData;
+  }
+
 }
 
-function removeNode(node: FrameNode): FrameNode {
-  return node;
+function removeNode(headNode: FrameNode, unsplitFrom:number): FrameNode {
+  return headNode;
 }
 
-function nodeReducer(node: FrameNode, action: Action): FrameNode {
+function nodeReducer(headNode: FrameNode, action: Action): FrameNode {
+  const newHeadNode = JSON.parse(JSON.stringify(headNode)) as FrameNode;
+  console.log(headNode);
   switch (action.type) {
     case ActionType.SPLITDOWN:
-      return addNodes(node, Orientation.VERTICAL, false);
+      addNodes(newHeadNode, action.id,Orientation.VERTICAL, false);
+      break;
     case ActionType.SPLITUP:
-      return addNodes(node);
+      addNodes(newHeadNode, action.id);
+      break;
     case ActionType.SPLITLEFT:
-      return addNodes(node, Orientation.HORIZONTAL);
+      addNodes(newHeadNode, action.id, Orientation.HORIZONTAL);
+      break;
     case ActionType.SPLITRIGHT:
-      return addNodes(node, Orientation.HORIZONTAL, false);
+      addNodes(newHeadNode, action.id, Orientation.HORIZONTAL, false);
+      break;
     case ActionType.UNSPLIT:
-      return removeNode(node);
+      removeNode(newHeadNode, action.id);
+      break;
     default:
-      return node;
+      break;
   }
+  return newHeadNode;
 }
