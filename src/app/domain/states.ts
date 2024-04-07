@@ -1,3 +1,5 @@
+import { FrameMetaData } from "./frame";
+
 export enum ActionType{
     SPLITLEFT,
     SPLITRIGHT,
@@ -8,7 +10,8 @@ export enum ActionType{
 
 export interface Action{
     type: ActionType,
-    id: number
+    id: number,
+    metaData?: FrameMetaData
 }
 
 export type FrameContentType = string | number | null | undefined;

@@ -1,3 +1,5 @@
+import { FrameContentType } from "./states"
+import { Tabs } from "./tabs"
 
 export enum Orientation{
     HORIZONTAL,
@@ -6,9 +8,13 @@ export enum Orientation{
 
 export type FrameData = ChildNodeData | InternalNodeData
 
+export interface FrameMetaData{
+    tabs?: Tabs
+}
 
 export interface ChildNodeData {
-    id:number
+    id:number,
+    metaData?: FrameMetaData
 }
 
 export interface InternalNodeData {

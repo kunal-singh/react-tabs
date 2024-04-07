@@ -1,6 +1,6 @@
 import { Tabs } from 'src/app/domain/tabs';
 import styles from './app-task-bar.module.scss';
-import { MouseEvent } from 'react';
+import { MouseEvent, ReactNode } from 'react';
 
 /* eslint-disable-next-line */
 export interface AppTaskBarProps {
@@ -22,7 +22,7 @@ export function AppTaskBar(props: AppTaskBarProps) {
              return (
               <div className={`${styles['tab']} ${activeTab === index ? styles['active'] : `` }`} onClick={(e)=>{e.stopPropagation(); setTab(index);}}>
                   <div className={styles['name']}>{t.name}</div>
-                  <button type="button" className={styles['menu']} onClick={(e) => { e.stopPropagation(); remove(index)}}>close</button>
+                  {tabs.length>1 && <button type="button" className={styles['menu']} onClick={(e) => { e.stopPropagation(); remove(index)}}>close</button>}
               </div>
              )
           }))

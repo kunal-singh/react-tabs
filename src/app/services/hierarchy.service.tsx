@@ -107,7 +107,10 @@ function removeNode(headNode: FrameNode, id:number){
     parentFrame.data = {id} as ChildNodeData;
   }
 }
-
+/**
+ * 
+ * using a binary tree as the data structure to store the frames. 
+ */
 function nodeReducer(headNode: FrameNode, action: Action): FrameNode {
   const newHeadNode = JSON.parse(JSON.stringify(headNode)) as FrameNode;
   switch (action.type) {
