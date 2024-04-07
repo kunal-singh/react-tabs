@@ -62,8 +62,6 @@ function isInternalNode(data: FrameData): data is InternalNodeData {
 
 
 function search(head:FrameNode,id:number): FrameNode | null{
-    //postorder traversal
-    
     if(!head.left && !head.right){
       return isChildNode(head.data) && head.data.id === id ? head : null; 
     }
@@ -73,8 +71,16 @@ function search(head:FrameNode,id:number): FrameNode | null{
 
 }
 
-function remove(node: FrameNode, id:number): FrameNode{
-   return node;
+function searchParent(head: FrameNode, id:number): FrameNode | null{
+  if(head.left && head.right && isInternalNode(head.data)){
+     const left= head.left.data as ChildNodeData;
+     const right= head.right.data as ChildNodeData;
+     console.log(left,right,id)
+     return left.id === id || right.id === id ? head : null;
+  }
+  const searchLeft =head.left && searchParent(head.left, id);
+  const searchright = head.right && searchParent(head.right, id);
+  return searchLeft || searchright;
 }
 
 function addNodes(
@@ -85,7 +91,6 @@ function addNodes(
 ) {
   
   const splitFromNode = search(headNode, splitFrom);
-  //console.log(headNode, splitFrom, splitFromNode);
   if(splitFromNode){
   const randomId = Date.now();
   splitFromNode.left = Node(randomId);
@@ -95,13 +100,18 @@ function addNodes(
 
 }
 
-function removeNode(headNode: FrameNode, unsplitFrom:number): FrameNode {
-  return headNode;
+function removeNode(headNode: FrameNode, id:number){
+  const parentFrame = searchParent(headNode,id);
+  console.log(parentFrame)
+  if(parentFrame){
+    parentFrame.left =null;
+    parentFrame.right = null;
+    parentFrame.data = {id} as ChildNodeData;
+  }
 }
 
 function nodeReducer(headNode: FrameNode, action: Action): FrameNode {
   const newHeadNode = JSON.parse(JSON.stringify(headNode)) as FrameNode;
-  console.log(headNode);
   switch (action.type) {
     case ActionType.SPLITDOWN:
       addNodes(newHeadNode, action.id,Orientation.VERTICAL, false);
